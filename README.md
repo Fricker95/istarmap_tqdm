@@ -29,6 +29,5 @@ if __name__ == "__main__":
 			args = ((range(10),) for _ in range(4))
 			for i in pool.istarmap_tqdm(_process_worker, args, chunksize=1):
 				pbar.update(1)
-				pbar.refresh()
 
 ```
