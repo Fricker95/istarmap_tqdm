@@ -10,6 +10,10 @@ import multiprocessing as mp
 import istarmap
 
 def _process_worker(queue, indexes):
+	"""
+		Batching pbar updates is recommended to prevent slow downs
+		For small number of updates this is not necessary.
+	"""
 	# current Process index
 	idx = mp.current_process()._identity[0]-1
 	counter = 0
@@ -29,5 +33,4 @@ if __name__ == "__main__":
 			args = ((range(10),) for _ in range(4))
 			for i in pool.istarmap_tqdm(_process_worker, args, chunksize=1):
 				pbar.update(1)
-
 ```
